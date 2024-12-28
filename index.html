@@ -48,7 +48,7 @@
   <div id="form">
     <div class="form-group">
       <label for="name">Name:</label>
-      <input type="text" id="name" placeholder="Enter card name">
+      <input type="text" id="name" name="name" placeholder="Enter card name">
     </div>
     <div class="form-group">
       <label for="cardType">Type:</label>
@@ -71,19 +71,19 @@
     </div>
     <div class="form-group">
       <label for="stats">Stats:</label>
-      <input type="text" id="stats" placeholder="Enter stats">
+      <input type="text" id="stats" name="stats" placeholder="Enter stats as X/Y">
     </div>
     <div class="form-group">
       <label for="abilities">Abilities:</label>
-      <textarea id="abilities" placeholder="Enter abilities"></textarea>
+      <textarea id="abilities" name="abilities" placeholder="Enter abilities"></textarea>
     </div>
     <div class="form-group">
       <label for="credits">Credits:</label>
-      <input type="text" id="credits" placeholder="Enter credits">
+      <input type="number" id="credits" name="credits" min="1" max="5" placeholder="Enter credits">
     </div>
     <div class="form-group">
       <label for="flavorText">Flavor Text:</label>
-      <textarea id="flavorText" placeholder="Enter flavor text"></textarea>
+      <textarea id="flavorText" name="flavorText" placeholder="Enter flavor text"></textarea>
     </div>
 
     <!-- Buttons for generating and downloading cards -->
@@ -91,13 +91,12 @@
     <button id="downloadCard">Download Card</button>
   </div>
 
-<div class="form-group">
-  <label for="loadFile">Load Card Details:</label>
-  <input type="file" id="loadFile" accept=".txt">
-</div>
-<button id="loadCard">Load Card</button>
+  <div class="form-group">
+    <label for="loadFile">Load Card Details:</label>
+    <input type="file" id="loadFile" accept=".txt">
+  </div>
+  <button id="loadCard">Load Card</button>
 
-  <!-- Canvas for displaying the generated card -->
   <div id="canvas-container">
     <canvas id="cardCanvas" width="600" height="900"></canvas>
   </div>
