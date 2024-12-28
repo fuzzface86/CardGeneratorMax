@@ -149,10 +149,14 @@ function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
 function downloadCard() {
   const canvas = document.getElementById("cardCanvas");
 
-  // Get input values
-  const name = document.getElementById("name").value.trim();
+  // Get the name from the Name field
+  const name = document.getElementById("name").value;
+
+  // Check if the name is not empty, otherwise default to "card"
+  const filename = name.trim() ? name : "card";
+
+  // Get input values for the card details
   const cardType = document.getElementById("cardType").value;
-  const faction = document.getElementById("faction").value; // Include Faction
   const stats = document.getElementById("stats").value;
   const abilities = document.getElementById("abilities").value;
   const credits = document.getElementById("credits").value;
@@ -160,16 +164,14 @@ function downloadCard() {
 
   // Download the card image as PNG
   const imageLink = document.createElement("a");
-  const filename = name || "card";
-  imageLink.download = `${filename}.png`; // Use Name field for image filename
+  imageLink.download = `${filename}.png`;  // Use the name input for the image file
   imageLink.href = canvas.toDataURL("image/png");
   imageLink.click();
 
-  // Generate the card details as a .txt file
+  // Generate card details and download as .txt file
   const cardDetails = `
 Name: ${name}
 Type: ${cardType}
-Faction: ${faction}
 Stats: ${stats}
 Abilities: ${abilities}
 Credits: ${credits}
@@ -178,7 +180,21 @@ Flavor Text: ${flavorText}
 
   const textBlob = new Blob([cardDetails], { type: "text/plain" });
   const textLink = document.createElement("a");
-  textLink.download = `${filename}.txt`; // Use Name field for text filename
+  
+  // Use the same name for the text file
+  textLink.download = `${filename}.txt`;  // Use the same filename for the .txt file
   textLink.href = URL.createObjectURL(textBlob);
   textLink.click();
+
+  // Clear the form fields
+  clearFields();
+}
+
+function clearFields() {
+  document.getElementById("name").value = "";
+  document.getElementById("cardType").value = "Character"; // Default value for dropdown
+  document.getElementById("stats").value = "";
+  document.getElementById("abilities").value = "";
+  document.getElementById("credits").value = "";
+  document.getElementById("flavorText").value = "";
 }
