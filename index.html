@@ -73,14 +73,18 @@
     <div class="form-group">
       <label for="faction">Faction:</label>
       <select id="faction">
-        <option value="Hackers">Hackers</option>
-        <option value="CEO">CEO</option>
-        <option value="Misc">Misc</option>
-      </select>
+  <option value="Hackers">Hackers</option>
+  <option value="CEO">CEO</option>
+  <option value="Misc">Misc</option>
+  <option value="Street Gangs">Street Gangs</option>
+  <option value="Resistance">The Resistance</option>
+  <option value="AI">AI</option>
+</select>
+
     </div>
     <div class="form-group">
-      <label for="stats">Stats:</label>
-      <input type="text" id="stats" name="stats" placeholder="Enter stats as X/Y">
+      <label for="powerLevel">Power Level:</label>
+      <input type="number" id="powerLevel" name="powerLevel" placeholder="Enter power level">
     </div>
     <div class="form-group">
       <label for="abilities">Abilities:</label>
@@ -112,7 +116,7 @@
   </div>
 
   <!-- Container to display saved cards -->
-  <div id="savedCardsContainer">
+  <div id="savedCardsContainer"></div>
 
   <script src="script.js"></script>
 </body>

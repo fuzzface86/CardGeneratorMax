@@ -35,7 +35,7 @@ function loadCard() {
       document.getElementById("name").value = data.name || "";
       document.getElementById("cardType").value = data.type || "Character";
       document.getElementById("faction").value = data.faction || "Misc";
-      document.getElementById("stats").value = data.stats || "";
+      document.getElementById("powerLevel").value = data["power level"] || "";
       document.getElementById("abilities").value = data.abilities || "";
       document.getElementById("credits").value = data.credits || "";
       document.getElementById("flavorText").value = data["flavor text"] || "";
@@ -61,23 +61,38 @@ function generateCard() {
   const name = document.getElementById("name").value.trim();
   const cardType = document.getElementById("cardType").value;
   const faction = document.getElementById("faction").value;
-  const stats = document.getElementById("stats").value;
+  const powerLevel = document.getElementById("powerLevel").value;
   const abilities = document.getElementById("abilities").value;
   const credits = document.getElementById("credits").value;
   const flavorText = document.getElementById("flavorText").value;
 
   // Save the card to local storage
-  saveCard({ name, cardType, faction, stats, abilities, credits, flavorText });
+  saveCard({ name, cardType, faction, powerLevel, abilities, credits, flavorText });
 
   // Clear the canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   // Set border color based on faction
   let borderColor = "#000000"; // Default border color
-  if (faction === "Hackers") {
-    borderColor = "#00FF00"; // Green for Hackers
-  } else if (faction === "CEO") {
-    borderColor = "#FF0000"; // Red for CEO
+  switch (faction) {
+    case "Hackers":
+      borderColor = "#00FF00"; // Green for Hackers
+      break;
+    case "CEO":
+      borderColor = "#FF0000"; // Red for CEO
+      break;
+    case "Misc":
+      borderColor = "#0000FF"; // Blue for Misc
+      break;
+    case "Street Gangs":
+      borderColor = "#FFA500"; // Orange for Street Gangs
+      break;
+    case "Resistance":
+      borderColor = "#800080"; // Purple for The Resistance
+      break;
+    case "AI":
+      borderColor = "#FFFF00"; // Yellow for AI
+      break;
   }
 
   // Background color
@@ -105,9 +120,10 @@ function generateCard() {
   ctx.font = "24px Arial";
   ctx.fillText(cardType, canvas.width / 2, canvas.height - 20);
 
-  // Stats
-  ctx.textAlign = "right";
-  ctx.fillText(stats, canvas.width - 30, canvas.height - 20);
+  // Power Level
+  ctx.textAlign = "center";
+  ctx.font = "24px Arial";
+  ctx.fillText(`${powerLevel}`, canvas.width - 30, canvas.height - 20);
 
   // Credits
   ctx.textAlign = "left";
@@ -151,7 +167,8 @@ function downloadCard() {
 
   // Get input values for the card details
   const cardType = document.getElementById("cardType").value;
-  const stats = document.getElementById("stats").value;
+  const faction = document.getElementById("faction").value;
+  const powerLevel = document.getElementById("powerLevel").value;
   const abilities = document.getElementById("abilities").value;
   const credits = document.getElementById("credits").value;
   const flavorText = document.getElementById("flavorText").value;
@@ -166,7 +183,8 @@ function downloadCard() {
   const cardDetails = `
 Name: ${name}
 Type: ${cardType}
-Stats: ${stats}
+Faction: ${faction}
+Power Level: ${powerLevel}
 Abilities: ${abilities}
 Credits: ${credits}
 Flavor Text: ${flavorText}
@@ -174,7 +192,7 @@ Flavor Text: ${flavorText}
 
   const textBlob = new Blob([cardDetails], { type: "text/plain" });
   const textLink = document.createElement("a");
-  
+
   // Use the same name for the text file
   textLink.download = `${filename}.txt`;
   textLink.href = URL.createObjectURL(textBlob);
@@ -188,7 +206,7 @@ function clearFields() {
   document.getElementById("name").value = "";
   document.getElementById("cardType").value = "Character";
   document.getElementById("faction").value = "Hackers";
-  document.getElementById("stats").value = "";
+  document.getElementById("powerLevel").value = "";
   document.getElementById("abilities").value = "";
   document.getElementById("credits").value = "";
   document.getElementById("flavorText").value = "";
@@ -242,7 +260,7 @@ function loadSavedCard(index) {
   document.getElementById("name").value = card.name || "";
   document.getElementById("cardType").value = card.cardType || "Character";
   document.getElementById("faction").value = card.faction || "Misc";
-  document.getElementById("stats").value = card.stats || "";
+  document.getElementById("powerLevel").value = card.powerLevel || "";
   document.getElementById("abilities").value = card.abilities || "";
   document.getElementById("credits").value = card.credits || "";
   document.getElementById("flavorText").value = card.flavorText || "";
